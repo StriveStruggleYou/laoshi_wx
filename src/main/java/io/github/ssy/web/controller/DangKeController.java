@@ -24,4 +24,9 @@ public class DangKeController {
         }
         return "/learning/1.html";
     }
+
+    @RequestMapping(value = "/learning/qiandao.html")
+    public String qianDao() {
+        return "/learning/table.html";
+    }
 }

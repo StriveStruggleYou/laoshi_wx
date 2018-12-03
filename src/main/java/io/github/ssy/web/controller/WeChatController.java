@@ -56,7 +56,7 @@ public class WeChatController {
     private String buidSendMessage(String openId) {
         StringBuffer str = new StringBuffer();
         String type = "text";
-        String backMsg = "http://laoshi.yidaren.top/learning/dangke/1";
+        String backMsg = "http://laoshi.yidaren.top//learning/qiandao.html";
         str.append("<xml>");
         str.append("<ToUserName>" + openId + "</ToUserName>");
         str.append("<FromUserName>gh_3678a48f4fca</FromUserName>");
