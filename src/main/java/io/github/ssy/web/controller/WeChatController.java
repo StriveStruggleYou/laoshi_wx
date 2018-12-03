@@ -26,6 +26,7 @@ public class WeChatController {
             String postdata = null;
             try {
                 postdata = inputStreamToString(request.getInputStream());
+                logger.warn("postdata" + postdata);
             } catch (Exception e) {
                 logger.error("postdata error openId" + openid, e);
             }
