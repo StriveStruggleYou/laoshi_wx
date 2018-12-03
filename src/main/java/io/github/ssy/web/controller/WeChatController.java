@@ -5,6 +5,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.servlet.http.HttpServletRequest;
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -27,6 +30,9 @@ public class WeChatController {
             try {
                 postdata = inputStreamToString(request.getInputStream());
                 logger.warn("postdata" + postdata);
+                Document doc = DocumentHelper.parseText(postdata);
+                Element root = doc.getRootElement();
+                return buidSendMessage(root.elementText("FromUserName"));
             } catch (Exception e) {
                 logger.error("postdata error openId" + openid, e);
             }
@@ -44,6 +50,24 @@ public class WeChatController {
             baos.write(i);
         }
         return baos.toString();
+    }
+
+
+    private String buidSendMessage(String openId) {
+        StringBuffer str = new StringBuffer();
+        String type = "text";
+        String backMsg = "http://laoshi.yidaren.top/learning/dangke/1.html";
+        str.append("<xml>");
+        str.append("<ToUserName>" + openId + "</ToUserName>");
+        str.append("<FromUserName>gh_3678a48f4fca</FromUserName>");
+        str.append("<CreateTime>" + System.currentTimeMillis() + "</CreateTime>");
+        str.append("<MsgType>" + type + "</MsgType>");
+        str.append("<Content>" + backMsg + "</Content>");
+        str.append("</xml>");
+        logger.info("appidCallBack method sync weixin user "
+                + "info to dalin account success:" + str.toString());
+        return str.toString();
+
     }
 
 
