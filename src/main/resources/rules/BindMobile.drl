@@ -10,7 +10,7 @@ rule "exit"
          when
              $s : WxUser(msg == "退出")
          then
-             $s.setState(0);
+             $s.setState(null);
              $s.setResponse("退出绑定流程");
              update($s);
 end
@@ -60,6 +60,7 @@ rule "inputTrueCode"
          when
              $s : WxUser(state == 2 && msg.length()==6 && NumberUtils.isNumber(msg))
          then
+             $s.setState(null);
              $s.setResponse("绑定成功");
              update($s);
 end
@@ -71,7 +72,7 @@ rule "inputFalseCode"
      lock-on-active true
      salience 1
          when
-             $s : WxUser(state == 1 && (msg.length()!=6 ||! NumberUtils.isNumber(msg)))
+             $s : WxUser(state == 2 && (msg.length()!=6 ||! NumberUtils.isNumber(msg)))
          then
              $s.setResponse("您的验证码输入错误");
              update($s);
@@ -83,7 +84,7 @@ rule "noState"
      lock-on-active true
      salience 1
          when
-             $s : WxUser(state == 0)
+             $s : WxUser(state == null)
          then
              $s.setResponse("不知道你在说什么");
              update($s);
