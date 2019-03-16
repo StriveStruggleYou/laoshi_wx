@@ -148,7 +148,7 @@ public class WeChatController {
   private String buidSubscribeSendMessage(String openId) {
     StringBuffer str = new StringBuffer();
     String type = "text";
-    String backMsg = "欢迎你关注我呀,想要获取微信获取余额提醒就输入绑定，进入手机号绑定流程";
+    String backMsg = "你好呀\uD83D\uDE09，欢迎你关注我们。想通过微信获取账户余额变动？回复\"绑定\"即可";
     str.append("<xml>");
     str.append("<ToUserName>" + openId + "</ToUserName>");
     str.append("<FromUserName>gh_3678a48f4fca</FromUserName>");
