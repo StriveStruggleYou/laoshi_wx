@@ -22,7 +22,7 @@ public class DangKeController {
                 return "redirect:http://h5.cyol.com/special/daxuexi/daxuexi2u7/m.php";
             }
         }
-        return "/learning/1.html";
+        return "/learning/table.html";
     }
 
     @RequestMapping(value = "/learning/qiandao.html")

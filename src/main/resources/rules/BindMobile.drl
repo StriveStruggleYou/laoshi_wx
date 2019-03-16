@@ -1,0 +1,92 @@
+package rules
+
+import io.github.ssy.entity.WxUser
+import org.apache.commons.lang3.math.NumberUtils
+
+rule "exit"
+     no-loop true
+     lock-on-active true
+     salience 1
+         when
+             $s : WxUser(msg == "退出")
+         then
+             $s.setState(0);
+             $s.setResponse("退出绑定流程");
+             update($s);
+end
+
+rule "bind"
+     no-loop true
+     lock-on-active true
+     salience 1
+         when
+             $s : WxUser(msg == "绑定")
+         then
+             $s.setState(1);
+             $s.setResponse("请输入手机号进行绑定");
+             update($s);
+end
+
+
+rule "inputTrueMobile"
+     no-loop true
+     lock-on-active true
+     salience 1
+         when
+             $s : WxUser(state == 1 && msg.length()==11 && NumberUtils.isNumber(msg))
+         then
+             $s.setState(2);
+             $s.setResponse("已经发送手机号");
+             update($s);
+end
+
+rule "inputFalseMobile"
+     no-loop true
+     lock-on-active true
+     salience 1
+         when
+             $s : WxUser(state == 1 && (msg.length()!=11 ||! NumberUtils.isNumber(msg)))
+         then
+             $s.setResponse("您没有输入正确的手机号信息");
+             update($s);
+end
+
+
+
+rule "inputTrueCode"
+     no-loop true
+     lock-on-active true
+     salience 1
+         when
+             $s : WxUser(state == 2 && msg.length()==6 && NumberUtils.isNumber(msg))
+         then
+             $s.setResponse("绑定成功");
+             update($s);
+end
+
+
+
+rule "inputFalseCode"
+     no-loop true
+     lock-on-active true
+     salience 1
+         when
+             $s : WxUser(state == 1 && (msg.length()!=6 ||! NumberUtils.isNumber(msg)))
+         then
+             $s.setResponse("您的验证码输入错误");
+             update($s);
+end
+
+
+rule "noState"
+     no-loop true
+     lock-on-active true
+     salience 1
+         when
+             $s : WxUser(state == 0)
+         then
+             $s.setResponse("不知道你在说什么");
+             update($s);
+end
+
+
