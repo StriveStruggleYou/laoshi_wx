@@ -64,8 +64,9 @@ public class WeChatController {
             wxUser.setOpenId(openId);
             wxUser.setMsg(content);
             //设置状态
-            wxUser.setState(userState.get(openId));
-
+            if (userState.get(openId)!=null) {
+              wxUser.setState(userState.get(openId));
+            }
             KieSession kieSession = droolsHelper.getKieSession();
 
             kieSession.insert(wxUser);
