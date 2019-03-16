@@ -36,7 +36,7 @@ rule "inputTrueMobile"
              $s : WxUser(state == 1 && msg.length()==11 && NumberUtils.isNumber(msg))
          then
              $s.setState(2);
-             $s.setResponse("已经发送手机号");
+             $s.setResponse("短信验证码已发送到"+$s.getMsg()+"。 (测试阶段请直接输入“123456”)");
              update($s);
 end
 
