@@ -5,7 +5,7 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
 public class DroolsHelper {
-  
+
   public KieSession getKieSession() {
     KieServices ks = KieServices.Factory.get();
 
