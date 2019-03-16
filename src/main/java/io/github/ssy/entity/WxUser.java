@@ -6,7 +6,7 @@ public class WxUser {
 
   private String msg;
 
-  private int state;
+  private Integer state;
 
   private String response;
 
@@ -30,7 +30,7 @@ public class WxUser {
     return state;
   }
 
-  public void setState(int state) {
+  public void setState(Integer state) {
     this.state = state;
   }
 
