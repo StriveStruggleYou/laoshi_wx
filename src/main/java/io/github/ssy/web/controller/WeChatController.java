@@ -170,8 +170,6 @@ public class WeChatController {
         + "<Event><![CDATA[subscribe]]></Event>\n"
         + "<EventKey><![CDATA[]]></EventKey>\n"
         + "</xml>\n";
-
-
   }
 
 

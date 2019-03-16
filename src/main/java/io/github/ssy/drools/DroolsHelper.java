@@ -5,15 +5,12 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
 public class DroolsHelper {
-  KieContainer kc;
-  public DroolsHelper(){
+  
+  public KieSession getKieSession() {
     KieServices ks = KieServices.Factory.get();
 
     // From the kie services, a container is created from the classpath
     KieContainer kc = ks.getKieClasspathContainer();
-  }
-
-  public KieSession getKieSession() {
     KieSession ksession = kc.newKieSession("BindMobile");
     return ksession;
   }
